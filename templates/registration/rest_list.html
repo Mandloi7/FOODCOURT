@@ -9,9 +9,9 @@
 <div class="card-group mx-auto my-5">
 {% for restaurant in restaurants %}
   <div class="card mb-3 my-5" style="max-width: 24rem;">
-    <img src="{% static 'images/BR.jpg'  %}" class="card-img-top img-thumbnail img-fluid" alt="{{ restaurant.rimg.url }}" style="height: 130px;">
+    <img src={{ restaurant.rimg}} class="card-img-top img-thumbnail img-fluid" alt="{{ restaurant.rimg}}" style="height: 130px;">
     <div class="card-body">
-      <a class="card-title" href="#" > {{ restaurant.rname }} </a>
+      <a class="card-title" href="{% url 'app1:Rest_detail' restaurant.id %}" > {{ restaurant.rname }} </a>
       <p class="card-text"> Rated : {{restaurant.rrating}}</p>
       <p class="card-text"><small class="text-muted"> Cuisine : {{ restaurant.cuisine }}</small></p>
     </div>

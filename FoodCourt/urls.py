@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.urls import path,include
 from users.views import HomeView
 from app1.views import Rest_list
-
+from . import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +26,8 @@ urlpatterns = [
     path('users/',include('django.contrib.auth.urls')),
     path('',HomeView,name='home'),
     path('app1/', include('app1.urls', namespace="app1")),
-   # path('restaurants/',Rest_list ,name='rest'),
+    # path('restaurants/',Rest_list ,name='rest'),
 ]
+
+if settings.DEBUG: # new
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

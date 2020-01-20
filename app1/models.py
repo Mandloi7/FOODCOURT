@@ -33,6 +33,8 @@ class foodpair(models.Model):
 
 class fcat(models.Model):
 	cname = models.CharField(max_length=250)
+	def __str__ (self):
+			return self.cname
 
 
 	

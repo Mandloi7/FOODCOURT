@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from .models import restaurant
+from app1.models import food
 # Create your views here.
 
 
@@ -9,6 +10,9 @@ def Rest_list(request):
 
 
 
-def Rest_detail(request, restaurant_pk):
-	foods = restaurant.objects.filter( restaurant_pk=restaurant_pk )
-	return render(request, 'registration/rest_detail.html', {'restaurant' : foods})
+def Rest_detail(request,id):
+
+	Restaurant = get_object_or_404(restaurant,pk=id)
+	x=Restaurant.food_set.all()
+	print(x)
+	return render(request, 'registration/rest_detail.html', {'Restaurant' : Restaurant})
