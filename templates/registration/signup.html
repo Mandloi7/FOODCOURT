@@ -1,0 +1,22 @@
+{% extends 'registration/base.html' %}
+{% block title %}
+Signup
+{% endblock %}
+{% block content %}
+<h2>SignUp</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">SignUp</button>
+</form>
+    <script>
+    var y=document.getElementsByTagName("ul");
+    var check=y[0];
+    y[0].parentNode.removeChild(y[0]);
+
+    var x=document.getElementsByClassName("helptext");
+    console.log(x)
+   x[1].innerHTML=""
+    </script>
+{% endblock %}

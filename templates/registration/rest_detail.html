@@ -1,0 +1,17 @@
+{% extends 'registration/base.html' %}
+
+
+{% block title %}
+{{ restaurant.rname }}
+{% endblock %}
+{% block content %}
+{% for food in restaurant.food_set.all  %}
+
+<h1>  {{ food.fname }} </h1>
+<h4> {{ food.fmoney }}</h4>
+
+
+
+
+{% endfor %}
+{% endblock %}
