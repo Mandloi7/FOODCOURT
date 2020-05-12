@@ -129,13 +129,13 @@ STATICFILES_DIRS=[
     os.path.join(BASE_DIR, "static"),
 ]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, '/media/restaurant')
-MEDIA_URL = '/media/retaurant/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 STATICFILES_DIRS=[
     os.path.join(BASE_DIR,"static"),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
-LOGIN_REDIRECT_URL='home'
+LOGIN_REDIRECT_URL='app1:rest'
 LOGOUT_REDIRECT_URL='home'
 

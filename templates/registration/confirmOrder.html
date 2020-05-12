@@ -1,0 +1,18 @@
+{% extends 'registration/base.html' %}
+{% block content %}
+
+{%for items in foodp %}
+{{items.food}}---{{items.qty}}
+<br>
+{% endfor %}
+
+<button id="confirm-order" onclick="confirm()">Confirm Order</button>
+
+<script>
+	function confirm()
+	{
+			window.location.href = "{% url 'app1:pay'%}"
+	}
+</script>
+{% endblock %}
+

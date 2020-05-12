@@ -3,10 +3,101 @@
 {{ Restaurant.rname }}
 {% endblock %}
 {% block content %}
-ijhi
-{% for food in Restaurant.food_set.all  %}
-hv gyhv
-<h1>  {{ food.fname }} </h1>
-<h4> {{ food.fmoney }}</h4>
-{% endfor %}
+{% for food in Restaurant.food_set.all %}
+<h1 class="{{food.fname}}">  {{ food.fname }} </h1>
+<h4 class="{{food.fname}}"> {{ food.fmoney }}</h4>
+<button class="{{food.fname}}" onclick="addit(this)">+</button>
+<button class="{{food.fname}}">Add</button>
+<button class="{{food.fname}}" onclick="diff(this)">-</button>
+{% endfor %}		
+<input id="val" type="hidden" value="{{cart.tot}}">
+<br>
+<br>
+<form method="POST">
+{% csrf_token %}
+<button id="order" name="order">Place Order</button>
+</form>
+
+<h1 id="changeit"><h1>
+	<br>
+<script>
+	var sum=0;
+	var tot=0;
+	var qty={
+	};
+	function addit(obj)
+	{
+		
+		var z=document.getElementsByClassName($(obj).attr('class'))[1].innerText;
+		var cname=$(obj).attr('class');
+		//console.log(qty.hasOwnProperty(cname));
+		if(qty.hasOwnProperty(cname)) qty[cname]+=1;
+		else
+		{
+			qty[cname]=1;
+		}
+		console.log(qty);
+		//console.log(document.getElementsByClassName($(obj).attr('class')))
+		sum=sum+parseInt(z);
+		tot=tot+1;
+		if(qty[cname]>0)document.getElementsByClassName($(obj).attr('class'))[3].innerText=qty[cname].toString()
+		if(qty[cname]==0)document.getElementsByClassName($(obj).attr('class'))[3].innerText="Add"
+			console.log(sum);
+		//alert(sum)
+	}
+	function diff(obj)
+	{
+		if(sum<=0) return;
+		var z=document.getElementsByClassName($(obj).attr('class'))[1].innerText;
+		var cname=$(obj).attr('class');
+		if(qty.hasOwnProperty(cname) )
+		{
+			if(qty[cname]>0)sum=sum-parseInt(z);
+			qty[cname]=qty[cname]-1;
+		} 
+		else{
+			return;
+		}
+
+		//console.log(document.getElementsByClassName($(obj).attr('class')))
+		if(qty[cname]>0)document.getElementsByClassName($(obj).attr('class'))[3].innerText=qty[cname].toString()
+		if(qty[cname]==0)document.getElementsByClassName($(obj).attr('class'))[3].innerText="Add"
+		console.log(sum);
+		tot=tot-1;
+		
+		//alert(sum)
+	}
+
+	$(function() {
+
+    $('#order').on('click',function() {
+    	alert("clicked");
+        $.ajax({
+            type: "POST",
+            url: "{% url 'app1:makeorder' %}",
+            dataType: 'html',
+            data: {
+                'qtydic':JSON.stringify(qty),
+                'total':sum,
+                'csrfmiddlewaretoken' : $("input[name=csrfmiddlewaretoken]").val()
+            },
+            success: searchSuccess,
+            error:errorm
+            
+        });
+    });
+});
+
+function searchSuccess(data, textStatus, jqXHR)
+{
+   	window.location.href = "{% url 'app1:confirmorder'%}"
+}
+
+function errorm(data, textStatus, jqXHR)
+{
+   	alert("ERROR!!")
+}
+
+
+</script>
 {% endblock %}

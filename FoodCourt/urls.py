@@ -19,13 +19,14 @@ from users.views import HomeView
 from app1.views import Rest_list
 from . import settings
 from django.conf.urls.static import static
-
+from app1.views import pay
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/',include('users.url')),
     path('users/',include('django.contrib.auth.urls')),
     path('',HomeView,name='home'),
     path('app1/', include('app1.urls', namespace="app1")),
+    path('payment/',pay,name="pay")
     # path('restaurants/',Rest_list ,name='rest'),
 ]
 

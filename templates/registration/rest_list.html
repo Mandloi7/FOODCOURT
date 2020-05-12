@@ -3,19 +3,34 @@
 {% block title %} Restaurants
 {% endblock %}
 {% block content %}
+<style type="text/css">
+	img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: : 100px;
+}
+</style>
 <h3 class="my-5 text-center"> CHOOSE YOUR RESTAURANT... </h3>
 
 <section class="mx-auto my-5">
 <div class="card-group mx-auto my-5">
 {% for restaurant in restaurants %}
   <div class="card mb-3 my-5" style="max-width: 24rem;">
-    <img src={{ restaurant.rimg}} class="card-img-top img-thumbnail img-fluid" alt="{{ restaurant.rimg}}" style="height: 130px;">
+    <img src="{{ restaurant.rimg.url}}" class="card-img-top img-thumbnail img-fluid" alt="{{ restaurant.rimg}}" style="height": 130px onclick="redirec()" >
     <div class="card-body">
       <a class="card-title" href="{% url 'app1:Rest_detail' restaurant.id %}" > {{ restaurant.rname }} </a>
       <p class="card-text"> Rated : {{restaurant.rrating}}</p>
       <p class="card-text"><small class="text-muted"> Cuisine : {{ restaurant.cuisine }}</small></p>
     </div>
    </div>
+
+ <script>
+function redirec() {
+  location.replace("{{ restaurant.rimg.url}}")
+}
+</script>
+
 {% endfor %}    
 </div>
 </section>

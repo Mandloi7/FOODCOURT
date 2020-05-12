@@ -1,0 +1,17 @@
+{% extends 'registration/base.html' %}
+{% block content %}
+<h1>Redirecting you to Payment....</h1></br>
+<h4 id="results">Please Donot refersh</h4>
+<form action="https://securegw-stage.paytm.in/order/process"  method="post" name="paytm">
+	{% for key,value in data_dic.items %}
+	<input type="hidden" name="{{key}}" value="{{value}}">
+	{% endfor%}
+</form> 	
+
+<script>
+	document.paytm.submit();
+</script>
+{% endblock %}
+
+
+
